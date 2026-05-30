@@ -48,10 +48,6 @@ Write a blog post explaining the attention mechanism to someone who has taken a 
 
 This post is a deliverable. Share the link at the Week 1 review. It should be readable and well-structured, not a dump of bullet points.
 
----
-
-## Second half (roughly days 4–5)
-
 ### Task 5 — Read the ViT paper
 
 Read [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929) (Dosovitskiy et al., 2020). This is the paper that brought the Transformer directly to image classification.
