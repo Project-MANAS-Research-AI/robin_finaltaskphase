@@ -1,3 +1,8 @@
+## Immediate TODOs:
+- [ ] Read Resnet
+- [ ] Read VIT
+- [ ] Implement RESNET
+
 # Week 1 — Foundations: Deep CNNs, Attention, and Vision Transformers
 
 ### Task 1 — Read the ResNet paper
