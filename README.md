@@ -1,8 +1,3 @@
-## MY Todos
-- [ ] Read the resnet paper
-- [ ] Read attn
-- [ ] read vit
-
 # Week 1 — Foundations: Deep CNNs, Attention, and Vision Transformers
 
 ### Task 1 — Read the ResNet paper
