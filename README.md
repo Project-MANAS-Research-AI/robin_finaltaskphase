@@ -1,3 +1,8 @@
+## TODOS:
+- [ ] Read the paper
+- [ ] Implement Resnet
+- [ ] Train on CIFAR
+
 # Week 1 — Foundations: Deep CNNs, Attention, and Vision Transformers
 
 ### Task 1 — Read the ResNet paper
