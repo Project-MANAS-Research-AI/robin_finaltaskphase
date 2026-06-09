@@ -33,7 +33,7 @@ The Experiment: Feed it a simple prompt (e.g., "A cinematic shot of a red car") 
 
 Mechanistic Probing: Use activation caching to isolate the specific attention heads or residual stream dimensions responsible for tracking and mutating visual attributes (like color, texture, or style modifiers) across token positions. Locate where this "visual metadata" is structured in the late-stage residual stream before generation.
 
-Task 6 — Write and Publish a Blog Post on Your TransformerLens Analysis
+### Task 6 — Write and Publish a Blog Post on Your TransformerLens Analysis
 Write a clear, straightforward technical blog post summarizing your findings from Task 5. It does not need to be fancy or overly dense—aim for a clean, accessible explanation of how the prompt generator handles textual modifiers. Your post must cover:
 
 The Goal: A brief description of what succinctly/text2image-prompt-generator does and why we are looking under the hood.
@@ -42,6 +42,6 @@ The Setup: A short code snippet showing how you loaded the model with Transforme
 
 Your Observations: An explanation of what changed in the internal layers when swapping a key visual token (like changing the color or subject of the prompt). Mention which specific layers or attention patterns seemed most responsive to the change.
 
-A Simple Graphic: Include a basic plot (e.g., an attention map matrix or an activation difference bar chart) generated during your experiment.
+Visualizations are encouraged.
 
 Publishing: If you do not have a blog, set one up using the GitHub Pages resources shared earlier[cite: 1]. Share the live link at the Week 1 review[cite: 1].
