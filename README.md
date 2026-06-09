@@ -24,7 +24,7 @@ Go through the reference tutorial we have been using: [TransformerLens Sample Tu
 
 Just like last time, you are expected to understand how Hooks are used to cache internal activations, intercept tensors during a forward pass, and perform basic ablation interventions.
 
-Task 5 — Activation Analysis of a Text-to-Image Prompt Generator
+### Task 4 — Activation Analysis of a Text-to-Image Prompt Generator
 Now, apply your TransformerLens skills to a model that bridges textual generation with visual concepts. You will analyze succinctly/text2image-prompt-generator [model](https://huggingface.co/succinctly/text2image-prompt-generator). It is supported by transformerlens [library](https://transformerlensorg.github.io/TransformerLens/generated/transformer_bridge_models.html?q=image). We had handled GPT2 last time, this text to image model actually uses gpt2 as base.
 
 Load this model into a HookedTransformer instance.
@@ -33,7 +33,7 @@ The Experiment: Feed it a simple prompt (e.g., "A cinematic shot of a red car") 
 
 Mechanistic Probing: Use activation caching to isolate the specific attention heads or residual stream dimensions responsible for tracking and mutating visual attributes (like color, texture, or style modifiers) across token positions. Locate where this "visual metadata" is structured in the late-stage residual stream before generation.
 
-### Task 6 — Write and Publish a Blog Post on Your TransformerLens Analysis
+### Task 5 — Write and Publish a Blog Post on Your TransformerLens Analysis
 Write a clear, straightforward technical blog post summarizing your findings from Task 5. It does not need to be fancy or overly dense—aim for a clean, accessible explanation of how the prompt generator handles textual modifiers. Your post must cover:
 
 The Goal: A brief description of what succinctly/text2image-prompt-generator does and why we are looking under the hood.
