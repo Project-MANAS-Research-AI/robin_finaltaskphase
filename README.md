@@ -17,7 +17,7 @@ Train your model on [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html)[cite
 - **Expected Target:** You should achieve above 90% test accuracy. If it is well below that, treat it as an interpretability/debugging exercise to trace where information is dropping.
 - **Deliverable:** Plot and save your training loss and test accuracy curves[cite: 1]. Write your own training loop rather than copy-pasting[cite: 1].
 
-Task 3 — Back to TransformerLens
+### Task 3 — Back to TransformerLens
 We have already had some experience with the TransformerLens Library, you will explore it a bit more throughout week 1.
 
 Go through the reference tutorial we have been using: [TransformerLens Sample Tutorial](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwi_4MX75PmUAxXHWHADHXLjJMAQFnoECBoQAQ&url=https%3A%2F%2Fcolab.research.google.com%2Fdrive%2F19mFGzQL_PX-PU_8FOSygeS9CZbuW75Qe&usg=AOvVaw2mLN8mjsYP5xfgZkDMaS3v&opi=89978449).
