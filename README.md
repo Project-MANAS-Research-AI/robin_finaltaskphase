@@ -1,3 +1,7 @@
+TODOs:
+- [ ] Resnet implementation is remaining
+- [ ] Transformelens left
+
 # Week 1 — Foundations: Vision Representations and Mechanistic Interpretability with TransformerLens
 
 ### Task 1 — Read the ResNet Paper
