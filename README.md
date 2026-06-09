@@ -1,59 +1,47 @@
-## TODOS:
-- [ ] Read the foundational & cutting-edge Vision Mech Int literature
-- [ ] Implement a clean, modular Vision Transformer (ViT) stem and Block
-- [ ] Train on CIFAR-10 with a hook-ready, completely transparent architecture
-- [ ] Map out a visual circuit or perform activation patching on your own weights
+# Week 1 — Foundations: Vision Representations and Mechanistic Interpretability with TransformerLens
 
-# Week 1 — Foundations: Vision Transformers, Superposition, and Visual Circuit Discovery
+### Task 1 — Read the ResNet Paper
 
-### Task 1 — Read the ViT Paper (Through a Mech Int Lens)
+Read [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385) (He et al., 2015). Read it fully, focusing heavily on information routing and gradient flow:
 
-Read [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929) (Dosovitskiy et al., 2020)[cite: 1]. Since you already understand standard text Transformers, read this strictly to analyze the structural changes enforced by spatial patching. Focus on:
+- Why does training accuracy degrade on very deep plain networks? Understand the degradation problem.
+- What does a residual block actually compute? Write out the equation by hand.
+- How does the identity shortcut connection act as a highway for gradient flow, and how does this relate to the concept of the "residual stream" in Transformer architectures?
 
-- **The Patch Stem:** How is the linear projection of flattened patches mathematically distinct from text token embeddings? How does the lack of inductive bias (compared to CNNs) affect early-layer representations?
-- **Positional Embeddings:** Look closely at the learned 1D position embeddings. How do they preserve 2D spatial coordinates? 
-- **The [CLS] Token:** How does the routing of information from patch tokens into the `[CLS]` token differ from how causal models route information to the final token?
+### Task 2 — Implement ResNet-18 from Scratch
 
-### Task 2 — Implement a "Hook-Ready" ViT from Scratch
+Implement ResNet-18 in PyTorch **without using `torchvision.models`**. You must write every layer yourself: the initial conv stem, the residual blocks, the downsampling shortcuts, and the classification head. 
 
-Implement a minimal, working Vision Transformer (ViT-Toy) in PyTorch **without using any external modeling libraries**. 
-* **Design Rule:** Your implementation must be built for easy interpretability. Every module (Patch Embedding, Attention Head, MLP block) must allow easy extraction of internal activations. Explicitly store or design hooks for the input and output of the residual stream at every block.
-* **Training:** Train your model from scratch on [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) using a simple classification loop[cite: 1]. 
-* **Deliverable:** Get your implementation to converge smoothly, plot your training/loss curves[cite: 1], and verify that your internal dictionary of activation shapes is well-indexed for patching.
+Train your model on [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html)[cite: 1]. You can use `torchvision.datasets.CIFAR10` for data loading with standard augmentations (random horizontal flip, random crop with padding=4, normalize).
 
-### Task 3 — Read Recent Frontiers in Vision Mech Int
+- **Expected Target:** You should achieve above 90% test accuracy. If it is well below that, treat it as an interpretability/debugging exercise to trace where information is dropping.
+- **Deliverable:** Plot and save your training loss and test accuracy curves[cite: 1]. Write your own training loop rather than copy-pasting[cite: 1].
 
-To upgrade from language-based Mech Int to the unique structural phenomena of vision, read these breakthrough concepts:
-1. **Visual Circuit Discovery:** Read *Seeing Through Circuits: Faithful Mechanistic Interpretability for Vision Transformers (2026)*. Understand how edge-based circuit discovery works in ViTs to locate task-specific computational subgraphs.
-2. **Concept Geometry & Superposition:** Review recent 2025/2026 work on *Minkowski Representation Geometry* in vision foundation models (e.g., DINO). Focus on how spatial tokens form convex mixtures of archetypes rather than purely sparse text-like representations.
+Task 3 — Back to TransformerLens
+We have already had some experience with the TransformerLens Library, you will explore it a bit more throughout week 1.
 
-**Focus Questions to Answer:**
-* What makes polysemanticity and superposition in vision channels fundamentally different from language models?
-* How do "induction heads" translate to vision? Do spatial attention heads behave more like translation invariant operators or semantic feature aggregators?
+Go through the reference tutorial we have been using: [TransformerLens Sample Tutorial](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwi_4MX75PmUAxXHWHADHXLjJMAQFnoECBoQAQ&url=https%3A%2F%2Fcolab.research.google.com%2Fdrive%2F19mFGzQL_PX-PU_8FOSygeS9CZbuW75Qe&usg=AOvVaw2mLN8mjsYP5xfgZkDMaS3v&opi=89978449).
 
-### Task 4 — Write and Publish a Technical Post: "The Spatial Transformer vs. The Causal LLM"
+Just like last time, you are expected to understand how Hooks are used to cache internal activations, intercept tensors during a forward pass, and perform basic ablation interventions.
 
-Write an advanced technical blog post mapping out how Mech Int primitives shift when moving from text sequence models to vision models. Your post must cover:
-* **Attention Layouts:** Bidirectional/Global attention in ViTs vs. Causal masking in LLMs, and why this complicates direct circuit tracing.
-* **The Token Space:** The mathematical implications of treating spatial pixel coordinates as independent semantic vectors.
-* **Visual Representation:** Include an original architectural schema or mathematical formulation comparing how features are packed into the residual stream in vision vs. language.
+Task 5 — Activation Analysis of a Text-to-Image Prompt Generator
+Now, apply your TransformerLens skills to a model that bridges textual generation with visual concepts. You will analyze succinctly/text2image-prompt-generator [model](https://huggingface.co/succinctly/text2image-prompt-generator). It is supported by transformerlens [library](https://transformerlensorg.github.io/TransformerLens/generated/transformer_bridge_models.html?q=image). We had handled GPT2 last time, this text to image model actually uses gpt2 as base.
 
-**Publishing:** Host this on your GitHub Pages blog and share the link for the Week 1 review[cite: 1].
+Load this model into a HookedTransformer instance.
 
-### Task 5 — Activation Patching & Toy Circuit Discovery
+The Experiment: Feed it a simple prompt (e.g., "A cinematic shot of a red car") versus a control prompt ("A cinematic shot of a blue car").
 
-Instead of using passive visualization tools like Attention Rollout[cite: 1], you will perform an active causal intervention on the weights of the ViT model you trained in Task 2.
+Mechanistic Probing: Use activation caching to isolate the specific attention heads or residual stream dimensions responsible for tracking and mutating visual attributes (like color, texture, or style modifiers) across token positions. Locate where this "visual metadata" is structured in the late-stage residual stream before generation.
 
-* Select two highly distinct classes from CIFAR-10 (e.g., *Automobile* vs. *Bird*).
-* **Intervention:** Run activation patching (causal swapping) across individual attention heads or MLP layers to determine where the "background features" separate from the "object features."
-* **Log the Evidence:** Find at least one structural component (a specific attention head or MLP channel) that, when ablated, completely flips the classification metric without destroying the rest of the representation. Save these intervention graphs.
+Task 6 — Write and Publish a Blog Post on Your TransformerLens Analysis
+Write a clear, straightforward technical blog post summarizing your findings from Task 5. It does not need to be fancy or overly dense—aim for a clean, accessible explanation of how the prompt generator handles textual modifiers. Your post must cover:
 
----
+The Goal: A brief description of what succinctly/text2image-prompt-generator does and why we are looking under the hood.
 
-## Week 1 review — what to bring
+The Setup: A short code snippet showing how you loaded the model with TransformerLens and added hooks to cache activations.
 
-- **Codebase Link:** Your custom, hook-ready ViT implementation on GitHub.
-- **Convergence Metrics:** Loss and training curves proving your scratch ViT successfully extracts visual features from CIFAR-10[cite: 1].
-- **Blog Post:** A link to your published deep-dive on Vision Mechanistic Interpretability[cite: 1].
-- **Causal Intervention Report:** Your activation patching diagrams detailing the exact blocks or heads responsible for separating conflicting visual features.
-- **Two Advanced Questions:** Open conceptual challenges regarding scaling visual circuit discovery or training Vision Sparse Autoencoders (SAEs).
+Your Observations: An explanation of what changed in the internal layers when swapping a key visual token (like changing the color or subject of the prompt). Mention which specific layers or attention patterns seemed most responsive to the change.
+
+A Simple Graphic: Include a basic plot (e.g., an attention map matrix or an activation difference bar chart) generated during your experiment.
+
+Publishing: If you do not have a blog, set one up using the GitHub Pages resources shared earlier[cite: 1]. Share the live link at the Week 1 review[cite: 1].
