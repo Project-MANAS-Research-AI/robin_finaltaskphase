@@ -1,4 +1,5 @@
 TODOs:
+- [*] Read ResNet Research paper
 - [ ] Resnet implementation is remaining
 - [x] Transformelens left
 
