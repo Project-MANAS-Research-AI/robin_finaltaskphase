@@ -2,8 +2,8 @@ TODOs:
 - [*] Read ResNet Research paper
 - [*] Resnet implementation is remaining
 - [*] Transformerlens review
-- [ ] text2image interp
-- [ ] blog
+- [*] text2image interp
+- [*] blog- https://medium.com/p/c685a9bcdb12?postPublishedType=initial
 
 # Week 1 — Foundations: Vision Representations and Mechanistic Interpretability with TransformerLens
 
